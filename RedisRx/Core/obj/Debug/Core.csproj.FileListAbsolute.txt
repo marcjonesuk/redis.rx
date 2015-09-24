@@ -1,0 +1,16 @@
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\Core.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\Core.pdb
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\StackExchange.Redis.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Core.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Interfaces.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Linq.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.PlatformServices.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\StackExchange.Redis.pdb
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\StackExchange.Redis.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Core.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Interfaces.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.Linq.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\bin\Debug\System.Reactive.PlatformServices.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\obj\Debug\Core.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\Core\obj\Debug\Core.pdb

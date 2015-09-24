@@ -1,1 +1,38 @@
 C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\RedisOrm.exe.config
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\RedisOrm.exe
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\RedisOrm.pdb
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\Core.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Core.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Interfaces.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Linq.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.PlatformServices.dll
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\Core.pdb
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.pdb
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Core.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Interfaces.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Linq.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\bin\Debug\System.Reactive.PlatformServices.xml
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\obj\Debug\RedisOrm.csprojResolveAssemblyReference.cache
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\obj\Debug\RedisOrm.exe
+C:\Users\marc.jones\Downloads\RedisOrm\RedisOrm\RedisOrm\obj\Debug\RedisOrm.pdb
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\RedisOrm.exe.config
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\RedisOrm.exe
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\RedisOrm.pdb
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\Core.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Core.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Interfaces.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Linq.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.PlatformServices.dll
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\Core.pdb
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.pdb
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\StackExchange.Redis.xml
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Core.xml
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Interfaces.xml
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.Linq.xml
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\System.Reactive.PlatformServices.xml
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.csprojResolveAssemblyReference.cache
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.exe
+C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.pdb
