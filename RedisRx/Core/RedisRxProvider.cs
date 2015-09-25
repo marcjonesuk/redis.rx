@@ -5,14 +5,14 @@ using StackExchange.Redis;
 
 namespace RedisRx
 {
-    public class RedisObservable
+    public class RedisRxProvider
     {
         private readonly IObservableFactory<string> _keyspaceEventObservableFactory;
         private readonly IObservableFactory<HashEntry[]> _hashMapObservableFactory;
         private readonly IObservableFactory<RedisValue> _stringObservableFactory;
         private readonly IObservableFactory<RedisValue[]> _listObservableFactory;
         
-        public RedisObservable(IDatabase db, ISubscriber sub)
+        public RedisRxProvider(IDatabase db, ISubscriber sub)
         {
             _keyspaceEventObservableFactory = new KeyspaceEventObservableFactory(sub);       
             

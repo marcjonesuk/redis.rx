@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1BAC0083-B620-4CA4-9B7F-CA91D95A5CCF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{622BCBFE-C1A5-4748-B0BC-02C4BDF52BD9}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RedisOrm</RootNamespace>
-    <AssemblyName>RedisOrm</AssemblyName>
+    <RootNamespace>RedisStreaming</RootNamespace>
+    <AssemblyName>RedisStreaming</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -56,22 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="HashMapUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Compile Include="StreamProvider.cs" />
+    <Compile Include="UpdateComparer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\RedisRx.csproj">
       <Project>{21ffd11a-a475-4daa-91bc-df7e0ff462f2}</Project>
       <Name>RedisRx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RedisStreaming\RedisStreaming.csproj">
-      <Project>{622bcbfe-c1a5-4748-b0bc-02c4bdf52bd9}</Project>
-      <Name>RedisStreaming</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
