@@ -11,18 +11,28 @@ namespace RedisRx
 {
     public class ObservableFactory<T> : IObservableFactory<T>
     {
-        private readonly IKeyspaceEventObservableFactory _notificationObservableFactory;
+        private readonly IObservableFactory<string> _notificationObservableFactory;
         private readonly HashSet<string> _updateOn;
+        private readonly Func<T, bool> _valueIsNull;
         private readonly IDataProviderAsync<T> _dataProvider;
         private readonly ConcurrentDictionary<string, IObservable<T>> _cache = new ConcurrentDictionary<string, IObservable<T>>();
 
         internal ObservableFactory(IDataProviderAsync<T> dataProvider,
-            IKeyspaceEventObservableFactory notificationObservableFactory,
-            HashSet<string> updateOn)
+            IObservableFactory<string> notificationObservableFactory,
+            HashSet<string> updateOn, Func<T, bool> valueIsNull = null)
         {
             _dataProvider = dataProvider;
             _notificationObservableFactory = notificationObservableFactory;
             _updateOn = updateOn;
+
+            if (valueIsNull != null)
+            {
+                _valueIsNull = valueIsNull;
+            }
+            else
+            {
+                _valueIsNull = t => false;
+            }
         }
 
         private async Task<T> GetNext(SemaphoreSlim mutex, string key)
@@ -70,6 +80,7 @@ namespace RedisRx
                         mutex.Dispose();
                     });
                 })
+                    .Where((t) => !_valueIsNull(t))
                     .Replay(1)
                     .RefCount();
 

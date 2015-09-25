@@ -19,12 +19,12 @@ namespace RedisOrm
             //var ksnObservableFactory = new KeyspaceEventTypeObservableFactory(redis.GetSubscriber());
             //var hashmapProvider = new DataProviderAsync(redis.GetDatabase());
 
-            var redisrx = new RedisRxProvider(redis.GetDatabase(), redis.GetSubscriber());
+            var redisrx = new RedisObservable(redis.GetDatabase(), redis.GetSubscriber());
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
             
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 10000; i++)
             {
                 int i1 = i % 500;
                 redisrx.HashMaps("te3st:" + i1).Subscribe((x) =>

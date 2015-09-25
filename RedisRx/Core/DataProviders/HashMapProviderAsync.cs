@@ -3,11 +3,11 @@ using StackExchange.Redis;
 
 namespace RedisRx
 {
-    public class HashMapDataProviderAsync : IDataProviderAsync<HashEntry[]>
+    public class HashMapProviderAsync : IDataProviderAsync<HashEntry[]>
     {
         private readonly IDatabase _database;
 
-        public HashMapDataProviderAsync(IDatabase database)
+        public HashMapProviderAsync(IDatabase database)
         {
             _database = database;
         }

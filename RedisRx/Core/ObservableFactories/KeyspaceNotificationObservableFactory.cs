@@ -6,7 +6,7 @@ using StackExchange.Redis;
 
 namespace RedisRx
 {
-    public class KeyspaceEventObservableFactory : IKeyspaceEventObservableFactory
+    public class KeyspaceEventObservableFactory : IObservableFactory<string>
     {
         private readonly ISubscriber _subscriber;
         private readonly ConcurrentDictionary<string, IObservable<string>> _cache = new ConcurrentDictionary<string, IObservable<string>>();
