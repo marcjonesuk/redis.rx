@@ -36,3 +36,6 @@ C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\bin\Debug\
 C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.csprojResolveAssemblyReference.cache
 C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.exe
 C:\Users\Marc\Documents\Visual Studio 2013\Projects\RedisOrm\RedisOrm\obj\Debug\RedisOrm.pdb
+C:\Users\Marc\Documents\GitHub\redis.rx\RedisRx\RedisOrm\bin\Debug\RedisOrm.exe.config
+C:\Users\Marc\Documents\GitHub\redis.rx\RedisRx\RedisOrm\obj\Debug\RedisOrm.exe
+C:\Users\Marc\Documents\GitHub\redis.rx\RedisRx\RedisOrm\obj\Debug\RedisOrm.pdb
