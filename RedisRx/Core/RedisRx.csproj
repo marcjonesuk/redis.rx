@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\KeyDeletedException.cs" />
     <Compile Include="Exceptions\KeyExpiredException.cs" />
-    <Compile Include="HashMapProviderAsync.cs" />
+    <Compile Include="DataProviders\HashMapProviderAsync.cs" />
     <Compile Include="HashMapStream.cs" />
     <Compile Include="HashMapObvservableFactory.cs" />
     <Compile Include="IHashMapObvservableFactory.cs" />
