@@ -27,9 +27,10 @@ namespace RedisOrm
             for (var i = 0; i < 100; i++)
             {
                 int i1 = i % 500;
-                redisrx.HashMaps("test:" + i1).Subscribe((x) =>
+                redisrx.HashMaps("te3st:" + i1).Subscribe((x) =>
                 {
-                    Console.WriteLine(x[0].Value);
+                    
+                    Console.WriteLine(x.Length);
                 });
             }
 

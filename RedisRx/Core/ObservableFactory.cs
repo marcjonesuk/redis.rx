@@ -13,14 +13,14 @@ namespace Core
     {
         private readonly IKeyspaceEventObservableFactory _notificationObservableFactory;
         private readonly HashSet<string> _updateOn;
-        private readonly IDataProviderAsync<T> _provider;
+        private readonly IDataProviderAsync<T> _dataProvider;
         private readonly ConcurrentDictionary<string, IObservable<T>> _cache = new ConcurrentDictionary<string, IObservable<T>>();
 
-        internal ObservableFactory(IDataProviderAsync<T> provider,
+        internal ObservableFactory(IDataProviderAsync<T> dataProvider,
             IKeyspaceEventObservableFactory notificationObservableFactory,
             HashSet<string> updateOn)
         {
-            _provider = provider;
+            _dataProvider = dataProvider;
             _notificationObservableFactory = notificationObservableFactory;
             _updateOn = updateOn;
         }
@@ -30,7 +30,7 @@ namespace Core
             try
             {
                 await mutex.WaitAsync();
-                return await _provider.GetNext(key);
+                return await _dataProvider.GetNext(key);
             }
             finally
             {
@@ -58,8 +58,8 @@ namespace Core
                         .Where(s => s == KeyspaceEventType.Expired)
                         .Subscribe(s => o.OnError(new KeyExpiredException(key)));
 
-                    var r = await GetNext(mutex, key);
-                    o.OnNext(r);
+                    //initial value
+                    GetNext(mutex, key).ContinueWith(t => o.OnNext(t.Result));
 
                     return Disposable.Create(() =>
                     {
