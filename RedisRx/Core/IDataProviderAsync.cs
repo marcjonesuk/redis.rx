@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public interface IDataProviderAsync<T>
     {

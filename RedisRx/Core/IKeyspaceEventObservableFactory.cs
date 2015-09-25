@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core
+namespace RedisRx
 {
     public interface IKeyspaceEventObservableFactory
     {

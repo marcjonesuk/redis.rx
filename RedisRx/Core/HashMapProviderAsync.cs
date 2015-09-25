@@ -1,8 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public class HashMapDataProviderAsync : IDataProviderAsync<HashEntry[]>
     {
@@ -16,21 +15,6 @@ namespace Core
         public Task<HashEntry[]> GetNext(string key)
         {
             return _database.HashGetAllAsync(key);
-        }
-    }
-
-    public class StringProviderAsync : IDataProviderAsync<string>
-    {
-        private readonly IDatabase _database;
-
-        public StringProviderAsync(IDatabase database)
-        {
-            _database = database;
-        }
-
-        public Task<string> GetNext(string key)
-        {
-            return _database.StringGetAsync(key).ContinueWith((t) => (string) t.Result);
         }
     }
 }

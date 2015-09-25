@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisOrm", "RedisOrm\RedisOrm.csproj", "{1BAC0083-B620-4CA4-9B7F-CA91D95A5CCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "RedisOrm\Test.csproj", "{1BAC0083-B620-4CA4-9B7F-CA91D95A5CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redis.RX", "Core\Redis.RX.csproj", "{21FFD11A-A475-4DAA-91BC-DF7E0FF462F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisRx", "Core\RedisRx.csproj", "{21FFD11A-A475-4DAA-91BC-DF7E0FF462F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

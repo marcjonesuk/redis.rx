@@ -5,9 +5,9 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Exceptions;
+using RedisRx.Exceptions;
 
-namespace Core
+namespace RedisRx
 {
     public class ObservableFactory<T> : IObservableFactory<T>
     {

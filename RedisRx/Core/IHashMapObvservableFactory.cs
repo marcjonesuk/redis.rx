@@ -1,7 +1,6 @@
 using System;
-using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public interface IObservableFactory<out T>
     {

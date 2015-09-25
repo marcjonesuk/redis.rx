@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public class RedisRxProvider
     {
         private readonly IKeyspaceEventObservableFactory _keyspaceEventObservableFactory;
         private readonly IObservableFactory<HashEntry[]> _hashMapObservableFactory;
-        private readonly IObservableFactory<string> _stringObservableFactory;
+        private readonly IObservableFactory<RedisValue> _stringObservableFactory;
         
         public RedisRxProvider(IDatabase db, ISubscriber sub)
         {
@@ -20,7 +17,7 @@ namespace Core
             _hashMapObservableFactory = new ObservableFactory<HashEntry[]>(new HashMapDataProviderAsync(db), 
                 _keyspaceEventObservableFactory, new HashSet<string>() { KeyspaceEventType.HSET, KeyspaceEventType.MSET });
 
-            _stringObservableFactory = new ObservableFactory<string>(new StringProviderAsync(db),
+            _stringObservableFactory = new ObservableFactory<RedisValue>(new StringProviderAsync(db),
                 _keyspaceEventObservableFactory, new HashSet<string>() { KeyspaceEventType.HSET, KeyspaceEventType.MSET });
         }
 
@@ -34,7 +31,7 @@ namespace Core
             return _hashMapObservableFactory.Create(key);
         }
 
-        public IObservable<string> Strings(string key)
+        public IObservable<RedisValue> Strings(string key)
         {
             return _stringObservableFactory.Create(key);
         }

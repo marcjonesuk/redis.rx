@@ -3,10 +3,10 @@ using System.Collections.Concurrent;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
-using Core.Exceptions;
+using RedisRx.Exceptions;
 using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public class HashMapObvservableFactory : IObservableFactory<HashEntry[]>
     {

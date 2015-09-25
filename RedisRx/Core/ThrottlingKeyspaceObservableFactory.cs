@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public class ThrottlingKeyspaceObservableFactory : IKeyspaceEventObservableFactory
     {

@@ -4,7 +4,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using StackExchange.Redis;
 
-namespace Core
+namespace RedisRx
 {
     public class KeyspaceEventObservableFactory : IKeyspaceEventObservableFactory
     {

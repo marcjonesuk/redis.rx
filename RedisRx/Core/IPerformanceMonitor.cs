@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace RedisRx
 {
     public interface IPerformanceMonitor
     {
