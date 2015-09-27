@@ -1,6 +1,6 @@
 ﻿namespace RedisRx
 {
-    public static class KeyspaceEventType
+    public static class KeyspaceEvents
     {
         public const string Set = "set";
         public const string MSet = "mset";

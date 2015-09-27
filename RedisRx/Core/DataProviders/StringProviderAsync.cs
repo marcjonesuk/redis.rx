@@ -5,9 +5,9 @@ namespace RedisRx
 {
     public class StringProviderAsync : IDataProviderAsync<RedisValue>
     {
-        private readonly IDatabase _database;
+        private readonly IDatabaseAsync _database;
 
-        public StringProviderAsync(IDatabase database)
+        public StringProviderAsync(IDatabaseAsync database)
         {
             _database = database;
         }

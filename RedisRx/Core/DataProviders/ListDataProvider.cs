@@ -9,9 +9,9 @@ namespace RedisRx.DataProviders
 {
     public class ListDataProviderAsync : IDataProviderAsync<RedisValue[]>
     {
-        private readonly IDatabase _database;
+        private readonly IDatabaseAsync _database;
 
-        public ListDataProviderAsync(IDatabase database)
+        public ListDataProviderAsync(IDatabaseAsync database)
         {
             _database = database;
         }

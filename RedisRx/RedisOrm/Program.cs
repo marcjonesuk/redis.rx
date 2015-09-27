@@ -1,63 +1,100 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using RedisRx;
+using RedisStreaming;
 using StackExchange.Redis;
 
 namespace RedisOrm
 {
+    public class Test
+    {
+        public decimal Bid { get; set; }
+        public decimal Ask { get; set; }
+    }
+
+
     class Program
     {
         static void Main(string[] args)
         {
             var redis = ConnectionMultiplexer.Connect("localhost"); //D2APDEV001
-            //var ksnObservableFactory = new KeyspaceEventTypeObservableFactory(redis.GetSubscriber());
-            //var hashmapProvider = new DataProviderAsync(redis.GetDatabase());
+            var redisRx = new RedisRxProvider(redis.GetDatabase(), redis.GetSubscriber());
 
-            var redisrx = new RedisRxProvider(redis.GetDatabase(), redis.GetSubscriber());
+            var options = new PublishOptions { DeleteOnDispose = true, Expiry = TimeSpan.FromSeconds(30) };
 
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            var redisstreaming = new RedisStreaming.StreamProvider(redisrx);
-
-            redisstreaming.HashMaps("fins-price:1").Subscribe(x =>
+            redisRx.RedisPublish("test:*", (k) =>
             {
+                var length = long.Parse(k.Split(':')[1]);
+                return Observable.Interval(TimeSpan.FromSeconds(length));
+            })
+            .Wait();
+
+
+
+            redisRx.RedisPublish("testmapxyz:*", (k) => /* respond to any requests matching string */
+            {
+                return Observable.Interval(TimeSpan.FromMilliseconds(250))
+                    .Select(x => new Test() { Bid = 100, Ask = 105 })
+                    .AsHashMap();   /* default convention based mapper */
+            })
+            .Wait();
+
+
+
+            redisRx.RedisPublish("testmap:*", (k) => /* respond to any requests matching string */
+            {
+                return Observable.Interval(TimeSpan.FromMilliseconds(250))
+                    .Select(x => new Test() { Bid = 100, Ask = 105 })
+                    .AsHashMap(new[]    /* custom mapping to hashmap */
+                    {
+                        new Mapping<Test>("bid", x => x.Bid),
+                        new Mapping<Test>("ask", x => x.Ask)
+                    });
+            })
+            .Wait();
+
+
+
+
+
+            //redisRx.RedisPublish("hashmap:*", (k) =>
+            //{
+            //    return Observable.Interval(TimeSpan.FromMilliseconds(250))
+            //        .Select(x =>
+            //        {
+            //            var d = new Dictionary<long, long>();
+            //            d.Add(x, x + 1);
+            //            return d;
+            //        })
+            //        .Sample(TimeSpan.FromSeconds(1));
+            //}).Wait();
+
+
+
+
+
+            redisRx.HashMaps("testmap:1").Subscribe(x =>
+            {
+                foreach (var v in x)
+                {
+                    Console.Write(v);
+                }
                 Console.WriteLine();
             });
 
 
-            //for (var i = 0; i < 10000; i++)
-            //{
-            //    int i1 = i % 500;
-            //    redisrx.HashMaps("te3st:" + i1).Subscribe((x) =>
-            //    {
-                    
-            //        Console.WriteLine(x.Length);
-            //    });
-            //}o
 
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
 
-            //Task.Run(() =>
+            //redisRx.HashMaps("hashmap:2").Subscribe(x =>
             //{
-            //    int x = 0;
-            //    while (true)
+            //    foreach (var v in x)
             //    {
-            //        Interlocked.Increment(ref x);
-            //        for (var i = 0; i < 10; i++)
-            //        {
-            //            redis.GetDatabase().HashSetAsync("test:" + i, new HashEntry[] { new HashEntry("name", x) });
-            //        }
-            //        Thread.Sleep(250);
+            //        Console.Write(v);
             //    }
+            //    Console.WriteLine();
             //});
+
+            ////redisRx.Observable<long>("test:1").Subscribe(u => Console.WriteLine(u), e => Console.WriteLine(e));
 
             Console.ReadLine();
         }

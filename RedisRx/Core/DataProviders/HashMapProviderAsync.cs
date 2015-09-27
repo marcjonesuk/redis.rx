@@ -5,9 +5,9 @@ namespace RedisRx
 {
     public class HashMapProviderAsync : IDataProviderAsync<HashEntry[]>
     {
-        private readonly IDatabase _database;
+        private readonly IDatabaseAsync _database;
 
-        public HashMapProviderAsync(IDatabase database)
+        public HashMapProviderAsync(IDatabaseAsync database)
         {
             _database = database;
         }

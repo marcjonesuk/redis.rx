@@ -6,6 +6,12 @@ namespace RedisStreaming
     public class HashMapUpdate
     {
         public IDictionary<RedisValue, RedisValue> Value { get; private set; }
+        internal HashMapUpdate Previous { get; set; }
+        
+        internal HashMapUpdate(IDictionary<RedisValue, RedisValue> value)
+        {
+            Value = value;
+        }
 
         private ISet<RedisValue> _updatedKeys;
         public ISet<RedisValue> UpdatedKeys
@@ -15,12 +21,6 @@ namespace RedisStreaming
                 _updatedKeys = UpdateComparer.GetUpdatedKeys(Value, Previous != null ? Previous.Value : null);
                 return _updatedKeys;
             }
-        }
-
-        internal HashMapUpdate Previous { get; set; }
-        internal HashMapUpdate(Dictionary<RedisValue, RedisValue> value)
-        {
-            Value = value;
         }
     }
 }
