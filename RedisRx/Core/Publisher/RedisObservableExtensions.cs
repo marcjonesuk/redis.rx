@@ -9,47 +9,104 @@ using StackExchange.Redis;
 
 namespace RedisStreaming
 {
-    public class Mapping<T>
+    public class RedisSetMapping
     {
-        public Func<T, object> Func { get; private set; }
-        public string Key { get; private set; }
+        //internal ISet<U> Do(T invalue)
+        //{
+        //    return new HashSet<U>();
+        //}
+    }
 
-        public Mapping(string key, Func<T, object> func)
+    public class ObjectToHashMapMapping<T>
+    {
+        private class FieldMapping<T>
         {
-            Key = key;
-            Func = func;
+            private Func<T, object> Func { get; set; }
+            private string Key { get; set; }
+
+            public FieldMapping(string key, Func<T, object> func)
+            {
+                Key = key;
+                Func = func;
+            }
+        }
+
+        private readonly List<FieldMapping<T>> _mappings = new List<FieldMapping<T>>();
+
+        public ObjectToHashMapMapping<T> With(string key, Func<T, object> func)
+        {
+            _mappings.Add(new FieldMapping<T>(key, func));
+            return this;
+        }
+
+        public ObjectToHashMapMapping<T> WithDefaults()
+        {
+            return this;
+        }
+
+        internal HashMap Do(T invalue)
+        {
+            return new HashMap(null);
         }
     }
 
+    public class Map
+    {
+        public static ObjectToHashMapMapping<T> ToHashMap<T>()
+        {
+            return new ObjectToHashMapMapping<T>();
+        }
+
+        public static RedisSetMapping ToSet()
+        {
+            return new RedisSetMapping();
+        }
+    }
+
+  
+
     public static class RedisObservableExtensions
     {
-        public static IObservable<HashEntry[]> AsHashMap<T>(this IObservable<T> source, Mapping<T>[] mapping = null)
+        public static IObservable<HashMap> AsRedisType<T>(this IObservable<T> source, ObjectToHashMapMapping<T> map = null)
         {
-            if (mapping == null)
-            {
-                mapping = CreateDefaultMapping<T>();
-            }
+            //if (map == null)
+            //{
+            //    map = CreateDefaultMapping<T>();
+            //}
 
             return source.Select(v =>
             {
-                HashEntry[] hashmap = new HashEntry[mapping.Length];
-                var c = 0;
-                foreach (var m in mapping)
-                {
-                    var result = m.Func(v);
-                    hashmap[c] = new HashEntry(JsonConvert.SerializeObject(m.Key), JsonConvert.SerializeObject(result));
-                    c++;
-                }
-                return hashmap;
+                //var hashmap = new HashEntry[map.Length];
+                //var c = 0;
+                //foreach (var m in map)
+                //{
+                //    var result = m.Func(v);
+                //    hashmap[c] = new HashEntry(JsonConvert.SerializeObject(m.Key), JsonConvert.SerializeObject(result));
+                //    c++;
+                //}
+                return new HashMap(null);
             });
         }
 
-        private static Mapping<T>[] CreateDefaultMapping<T>()
+        public static IObservable<RedisHashSet> AsRedisType<T>(this IObservable<T> source, RedisSetMapping map = null)
         {
-            return (new List<Mapping<T>>()).ToArray();
+            
+        }
+
+        private static FieldMapping<T>[] CreateDefaultMapping<T>()
+        {
+            return (new List<FieldMapping<T>>()).ToArray();
         }
 
         private static readonly ConcurrentDictionary<Type, MethodInfo> _typeCooercionLookup = new ConcurrentDictionary<Type, MethodInfo>();
+
+        public static void ToRedis(this IObservable<HashMap> source, string key, IDatabaseAsync db, ISerializer serializer = null)
+        {
+            source.Subscribe(async u =>
+            {
+                await db.HashSetAsync(key, u.Value);
+            });
+        }
 
         public static void ToRedis<T>(this IObservable<T> source, string key, IDatabaseAsync db, ISerializer serializer = null)
         {
@@ -61,8 +118,6 @@ namespace RedisStreaming
 
             var mi = _typeCooercionLookup.GetOrAdd(typeof(T), t =>
             {
-             
-
                 var interfaces = typeof(T).GetInterfaces();
                 bool isBar = interfaces.Any(x =>
                     x.IsGenericType &&

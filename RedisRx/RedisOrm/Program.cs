@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using RedisRx;
 using RedisStreaming;
@@ -11,6 +12,10 @@ namespace RedisOrm
         public decimal Bid { get; set; }
         public decimal Ask { get; set; }
     }
+
+    o
+
+
 
 
     class Program
@@ -29,31 +34,41 @@ namespace RedisOrm
             })
             .Wait();
 
-
-
             redisRx.RedisPublish("testmapxyz:*", (k) => /* respond to any requests matching string */
             {
                 return Observable.Interval(TimeSpan.FromMilliseconds(250))
-                    .Select(x => new Test() { Bid = 100, Ask = 105 })
-                    .AsHashMap();   /* default convention based mapper */
+                    //.Select(x => new Test() { Bid = 100, Ask = 105 })
+                    .Select(x => new HashSet<long>())
+                    .AsRedisType(Map.ToSet());   
+
+                    /* default convention based mapper */
             })
             .Wait();
+
 
 
 
             redisRx.RedisPublish("testmap:*", (k) => /* respond to any requests matching string */
-            {
-                return Observable.Interval(TimeSpan.FromMilliseconds(250))
+                Observable.Interval(TimeSpan.FromMilliseconds(250))
                     .Select(x => new Test() { Bid = 100, Ask = 105 })
-                    .AsHashMap(new[]    /* custom mapping to hashmap */
-                    {
-                        new Mapping<Test>("bid", x => x.Bid),
-                        new Mapping<Test>("ask", x => x.Ask)
-                    });
-            })
+                    .AsRedisType(Map.ToHashMap<Test>()
+                        .With("bid", t => t.Bid)
+                        .With("ask", t => t.Ask))
+                    .Sample(TimeSpan.FromSeconds(1)))
             .Wait();
+            
+            
+            
+            
+            
+            
 
 
+
+            redisRx.HashMaps("key1").Subscribe((x) =>
+            {
+
+            });
 
 
 

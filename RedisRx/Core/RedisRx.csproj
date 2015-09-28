@@ -71,6 +71,7 @@
     <Compile Include="ObservableFactories\ObservableFactory.cs" />
     <Compile Include="ObservableFactories\SubscriptionObservableFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publisher\HashMap.cs" />
     <Compile Include="Publisher\ISerializer.cs" />
     <Compile Include="Publisher\Publisher.cs" />
     <Compile Include="Publisher\RedisDictionary.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="RedisRxProvider.cs" />
     <Compile Include="SingleThreadSynchronizationContext.cs" />
     <Compile Include="DataProviders\StringProviderAsync.cs" />
-    <Compile Include="ObservableFactories\ThrottlingKeyspaceObservableFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
