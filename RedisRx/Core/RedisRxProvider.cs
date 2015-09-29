@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using RedisRx.Consumer.DataProviders;
 using RedisRx.DataProviders;
 using RedisRx.Interfaces;
+using RedisRx.Publisher.Types;
 using RedisStreaming;
 using StackExchange.Redis;
 
@@ -76,9 +78,9 @@ namespace RedisRx
             return _publisher.AddHandler(key, handler, null);
         }
 
-        //public Task RedisPublish<T>(string key, PublishOptions options, Func<string, IObservable<RedisObject>> handler)
-        //{
-        //    return _publisher.AddHandler(key, handler, options);
-        //}
+        public Task RedisPublish<T>(string key, PublishOptions options, Func<string, IObservable<RedisObject>> handler)
+        {
+            return _publisher.AddHandler(key, handler, options);
+        }
     }
 }

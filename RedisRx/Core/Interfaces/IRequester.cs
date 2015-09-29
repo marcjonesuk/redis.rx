@@ -18,8 +18,9 @@ namespace RedisRx.Interfaces
 
         public void Request(string key)
         {
-            var value = "__redisrxrequests__:" + key;
-            _subscriber.PublishAsync(value, key);
+            //var value = "__redisrxrequests__:" + key;
+            var channel = "SubscribeKey-" + key;
+            _subscriber.PublishAsync(channel, key);
         }
     }
 }

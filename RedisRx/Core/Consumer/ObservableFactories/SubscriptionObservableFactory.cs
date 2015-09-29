@@ -18,7 +18,8 @@ namespace RedisRx
         {
             return Observable.Create<string>(async o =>
             {
-                var channel = "__redisrxrequests__:" + key;
+                //var channel = "__redisrxrequests__:" + key;
+                var channel = "SubscribeKey-" + key;
                 Action<RedisChannel, RedisValue> handler = (c, value) => { o.OnNext(value.ToString()); };
                 await _subscriber.SubscribeAsync(channel, handler);
                 o.OnNext(null);

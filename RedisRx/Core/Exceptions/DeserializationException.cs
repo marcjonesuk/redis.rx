@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedisRx.Exceptions
 {
-    public class DeserializationException
+    public class DeserializationException : Exception
     {
     }
 }

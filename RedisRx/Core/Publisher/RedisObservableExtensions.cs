@@ -1,86 +1,14 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using System.Reactive.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using RedisRx.Publisher.TypeMappers;
+using RedisRx.Publisher.Types;
 using StackExchange.Redis;
 
-namespace RedisStreaming
+namespace RedisRx.Publisher
 {
-    public abstract class RedisMapper<T>
-    {
-        public abstract RedisObject Do(T i);
-    }
-
-    public class SetMapper<T> : RedisMapper<IEnumerable<T>>
-    {
-        private ISerializer _serializer;
-
-        public SetMapper<T> WithSerializer(ISerializer serializer)
-        {
-            _serializer = serializer;
-            return this;
-        }
-
-        public override RedisObject Do(IEnumerable<T> i)
-        {
-            return new RedisObject(RedisType.Set, i.Select(v => (RedisValue)JsonConvert.SerializeObject(v)).ToArray());
-        }
-    }
-
-    public class HashMapMapper<T> : RedisMapper<T>
-    {
-        private ISerializer _serializer;
-
-        public HashMapMapper<T> WithSerializer(ISerializer serializer)
-        {
-            _serializer = serializer;
-            return this;
-        }
-
-        private class FieldMapping<T>
-        {
-            public Func<T, object> Func { get; set; }
-            public string Key { get; set; }
-
-            public FieldMapping(string key, Func<T, object> func)
-            {
-                Key = key;
-                Func = func;
-            }
-        }
-
-        private readonly List<FieldMapping<T>> _mappings = new List<FieldMapping<T>>();
-
-        public HashMapMapper<T> WithField(string key, Func<T, object> func)
-        {
-            _mappings.Add(new FieldMapping<T>(key, func));
-            return this;
-        }
-
-        public HashMapMapper<T> WithDefaults()
-        {
-            return this;
-        }
-
-        public override RedisObject Do(T invalue)
-        {
-            var length = _mappings.Count;
-            HashEntry[] hes = new HashEntry[length];
-            for (var i = 0; i < length; i++)
-            {
-                hes[i] = new HashEntry(_mappings[i].Key, JsonConvert.SerializeObject(_mappings[i].Func(invalue)));
-            }
-            return new RedisObject(RedisType.Hash, hes);
-        }
-    }
-
-
     public static class RedisObservableExtensions
     {
         public static IObservable<RedisObject> AsRedisHash<T>(this IObservable<T> source, Action<HashMapMapper<T>> func = null)

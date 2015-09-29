@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace RedisRx
+namespace RedisRx.Consumer.DataProviders
 {
     public class HashMapProviderAsync : IDataProviderAsync<HashEntry[]>
     {

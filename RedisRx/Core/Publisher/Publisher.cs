@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using RedisRx.Publisher.Types;
 using RedisStreaming;
 using StackExchange.Redis;
 

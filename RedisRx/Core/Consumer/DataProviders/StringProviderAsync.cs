@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace RedisRx
+namespace RedisRx.DataProviders
 {
     public class StringProviderAsync : IDataProviderAsync<RedisValue>
     {

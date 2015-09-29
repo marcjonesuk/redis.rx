@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Linq;
 using RedisRx;
+using RedisRx.Publisher;
 using RedisStreaming;
 using StackExchange.Redis;
 
@@ -20,15 +20,16 @@ namespace RedisOrm
             var redis = ConnectionMultiplexer.Connect("localhost"); //D2APDEV001
             var redisRx = new RedisRxProvider(redis.GetDatabase(), redis.GetSubscriber());
 
-            var options = new PublishOptions { DeleteOnDispose = true, Expiry = TimeSpan.FromSeconds(30) };
+            var options = new PublishOptions { DeleteOnDispose = true, 
+                Expiry = TimeSpan.FromSeconds(30) };
 
-            redisRx.Publish("test:*", (k) =>
-            {
-                var length = long.Parse(k.Split(':')[1]);
-                return Observable.Interval(TimeSpan.FromSeconds(length))
-                                 .AsRedisHash();
-            })
-            .Wait();
+            //redisRx.Publish("test:*", (k) =>
+            //{
+            //    var length = long.Parse(k.Split(':')[1]);
+            //    return Observable.Interval(TimeSpan.FromSeconds(length))
+            //                     .AsRedisHash();
+            //})
+            //.Wait();
 
             //redisRx.RedisPublish("testmapxyz:*", (k) => /* respond to any requests matching string */
             //{
@@ -39,30 +40,34 @@ namespace RedisOrm
             //.Wait();
 
 
+            
 
 
-            redisRx.Publish("testmap:*", (k) => /* respond to any requests matching string */
-                Observable.Interval(TimeSpan.FromMilliseconds(250))
-                    .Select(x => new Test() { Bid = 102, Ask = 107 })
-                    .Sample(TimeSpan.FromSeconds(1))
-                    .AsRedisHash(map => map.WithField("bid", pfm => pfm.Bid)
-                                           .WithField("ask", pfm => pfm.Ask)))
-            .Wait();
-
-
-
-
+           // redisRx.Publish("testmap:*", (k) => /* respond to any requests matching string */
+           //     Observable.Interval(TimeSpan.FromMilliseconds(250))
+           //         .Select(x => new Test() { Bid = 102, Ask = 107 })
+           //         .Sample(TimeSpan.FromSeconds(1))
+           //         .AsRedisHash(map => map.WithField("bid", pfm => pfm.Bid)
+           //                                .WithField("ask", pfm => pfm.Ask)))
+           // .Wait();
 
 
 
 
 
-            redisRx.HashMaps("key1").Subscribe((x) =>
+           // redisRx.Publish("testmap:*", (k) => /* respond to any requests matching string */
+           //    Observable.Interval(TimeSpan.FromMilliseconds(250))
+           //        .Select(x => new Test() { Bid = 102, Ask = 107 })
+           //        .Sample(TimeSpan.FromSeconds(1))
+           //        .AsRedisHash())
+           //.Wait();
+
+
+            redisRx.HashMaps("sports-price:47370").Subscribe((x) =>
             {
-
+                Console.WriteLine(x);
             });
-
-
+            
 
             //redisRx.RedisPublish("hashmap:*", (k) =>
             //{
@@ -80,16 +85,7 @@ namespace RedisOrm
 
 
 
-            redisRx.HashMaps("testmap:1").Subscribe(x =>
-            {
-                foreach (var v in x)
-                {
-                    Console.Write(v);
-                }
-                Console.WriteLine();
-            });
-
-            //redisRx.HashMaps("hashmap:2").Subscribe(x =>
+            //redisRx.HashMaps("testmap:1").Subscribe(x =>
             //{
             //    foreach (var v in x)
             //    {
@@ -98,7 +94,7 @@ namespace RedisOrm
             //    Console.WriteLine();
             //});
 
-            ////redisRx.Observable<long>("test:1").Subscribe(u => Console.WriteLine(u), e => Console.WriteLine(e));
+
 
             Console.ReadLine();
         }
