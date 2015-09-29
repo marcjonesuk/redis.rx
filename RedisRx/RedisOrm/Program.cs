@@ -13,11 +13,6 @@ namespace RedisOrm
         public decimal Ask { get; set; }
     }
 
-    o
-
-
-
-
     class Program
     {
         static void Main(string[] args)
@@ -27,41 +22,38 @@ namespace RedisOrm
 
             var options = new PublishOptions { DeleteOnDispose = true, Expiry = TimeSpan.FromSeconds(30) };
 
-            redisRx.RedisPublish("test:*", (k) =>
+            redisRx.Publish("test:*", (k) =>
             {
                 var length = long.Parse(k.Split(':')[1]);
-                return Observable.Interval(TimeSpan.FromSeconds(length));
+                return Observable.Interval(TimeSpan.FromSeconds(length))
+                                 .AsRedisHash();
             })
             .Wait();
 
-            redisRx.RedisPublish("testmapxyz:*", (k) => /* respond to any requests matching string */
-            {
-                return Observable.Interval(TimeSpan.FromMilliseconds(250))
-                    //.Select(x => new Test() { Bid = 100, Ask = 105 })
-                    .Select(x => new HashSet<long>())
-                    .AsRedisType(Map.ToSet());   
-
-                    /* default convention based mapper */
-            })
-            .Wait();
+            //redisRx.RedisPublish("testmapxyz:*", (k) => /* respond to any requests matching string */
+            //{
+            //    return Observable.Interval(TimeSpan.FromMilliseconds(250))
+            //        .Select(x => new List<long>() { 1, 2, 3 })
+            //        .AsSet(x => x.WithSerializer(null));
+            //})
+            //.Wait();
 
 
 
 
-            redisRx.RedisPublish("testmap:*", (k) => /* respond to any requests matching string */
+            redisRx.Publish("testmap:*", (k) => /* respond to any requests matching string */
                 Observable.Interval(TimeSpan.FromMilliseconds(250))
-                    .Select(x => new Test() { Bid = 100, Ask = 105 })
-                    .AsRedisType(Map.ToHashMap<Test>()
-                        .With("bid", t => t.Bid)
-                        .With("ask", t => t.Ask))
-                    .Sample(TimeSpan.FromSeconds(1)))
+                    .Select(x => new Test() { Bid = 102, Ask = 107 })
+                    .Sample(TimeSpan.FromSeconds(1))
+                    .AsRedisHash(map => map.WithField("bid", pfm => pfm.Bid)
+                                           .WithField("ask", pfm => pfm.Ask)))
             .Wait();
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
 
 
 
@@ -96,9 +88,6 @@ namespace RedisOrm
                 }
                 Console.WriteLine();
             });
-
-
-
 
             //redisRx.HashMaps("hashmap:2").Subscribe(x =>
             //{

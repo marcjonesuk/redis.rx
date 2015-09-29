@@ -71,14 +71,14 @@ namespace RedisRx
             return _listObservableFactory.Create(key);
         }
 
-        public Task RedisPublish<T>(string key, Func<string, IObservable<T>> handler)
+        public Task Publish(string key, Func<string, IObservable<RedisObject>> handler)
         {
             return _publisher.AddHandler(key, handler, null);
         }
 
-        public Task RedisPublish<T>(string key, PublishOptions options, Func<string, IObservable<T>> handler)
-        {
-            return _publisher.AddHandler(key, handler, options);
-        }
+        //public Task RedisPublish<T>(string key, PublishOptions options, Func<string, IObservable<RedisObject>> handler)
+        //{
+        //    return _publisher.AddHandler(key, handler, options);
+        //}
     }
 }

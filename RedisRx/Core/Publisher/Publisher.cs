@@ -16,7 +16,7 @@ namespace RedisRx.Publisher
             _req = new SubscriptionObservableFactory(subscriber);
         }
 
-        public Task AddHandler<T>(string key, Func<string, IObservable<T>> handler, PublishOptions options)
+        public Task AddHandler(string key, Func<string, IObservable<RedisObject>> handler, PublishOptions options)
         {
             var tcs = new TaskCompletionSource<object>();
             try
